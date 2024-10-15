@@ -25,26 +25,23 @@ steps:
     echo "Updated PATH: %PATH%"
   displayName: 'Set npm and node.js path'
 
+- script: |
+    if exist "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" (
+        echo "PowerShell found"
+        set PATH=C:\Windows\System32\WindowsPowerShell\v1.0;%PATH%
+    ) else (
+        echo "PowerShell not found"
+        exit /b 1
+    )
+    echo "Updated PATH with PowerShell: %PATH%"
+  displayName: 'Ensure PowerShell is available'
+
 - task: UseDotNet@2
   displayName: 'Use .NET SDK 6.x'
   inputs:
     packageType: sdk
     version: '6.x'
-
-- task: Npm@1
-  displayName: 'Run npm install'
-  inputs:
-    verbose: false
-
-- script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
-  displayName: 'Compile Sass assets'
-
-- task: gulp@1
-  displayName: 'Run gulp tasks'
-
-- script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
-  displayName: 'Write build info'
-  workingDirectory: Tailspin.SpaceGame.Web/wwwroot
+    installationPath: $(Agent.ToolsDirectory)/dotnet
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore project dependencies'
