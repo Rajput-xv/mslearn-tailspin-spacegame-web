@@ -1,12 +1,14 @@
 pool: 
-    name: Default
+  name: Default
+
 steps:
-# - bash: echo hello world
+- script: echo $PATH
+  displayName: 'Print PATH'
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: env
-    
+
 variables:
   BASH_ENV: "~/.profile"
-
