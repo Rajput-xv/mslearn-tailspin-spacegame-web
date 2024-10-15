@@ -5,10 +5,8 @@ steps:
 - script: echo %PATH%
   displayName: 'Print PATH'
 
-
-- script: where bash
+- script: dir "C:\Program Files\Git\bin\bash.exe"
   displayName: 'Check Bash Location'
-
 
 - task: Bash@3
   inputs:
