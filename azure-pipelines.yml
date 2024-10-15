@@ -20,6 +20,11 @@ steps:
     targetType: 'inline'
     script: env
 
+- script: |
+    export PATH=C:\Users\acer\.nvm\versions\node\v12.22.12\bin:$PATH
+    echo "Updated PATH: $PATH"
+  displayName: 'Set npm and node.js path'
+
 - task: UseDotNet@2
   displayName: 'Use .NET SDK 6.x'
   inputs:
