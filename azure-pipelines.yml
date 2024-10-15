@@ -2,10 +2,10 @@ pool:
   name: Default
 
 steps:
-- script: echo $PATH
+- powershell: echo $env:PATH
   displayName: 'Print PATH'
 
-- script: where bash
+- powershell: Get-Command bash
   displayName: 'Check Bash Location'
 
 - task: Bash@3
