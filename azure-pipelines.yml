@@ -21,7 +21,6 @@ steps:
     )
     echo "Updated PATH with PowerShell: %PATH%"
   displayName: 'Ensure PowerShell is available'
-  shell: cmd
 
 - task: UseDotNet@2
   displayName: 'Use .NET SDK 6.x'
