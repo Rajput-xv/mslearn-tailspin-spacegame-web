@@ -2,11 +2,13 @@ pool:
   name: Default
 
 steps:
-- powershell: echo $env:PATH
+- script: echo %PATH%
   displayName: 'Print PATH'
 
-- powershell: Get-Command bash
+
+- script: where bash
   displayName: 'Check Bash Location'
+
 
 - task: Bash@3
   inputs:
