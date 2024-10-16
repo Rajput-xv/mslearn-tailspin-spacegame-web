@@ -20,19 +20,15 @@ steps:
     verbose: false
 
 - powershell: |
-    if (-not (Get-Module -ListAvailable -Name Microsoft.PowerShell.Security)) {
-        Write-Error "Microsoft.PowerShell.Security module is not available."
-        exit 1
-    }
+    $ErrorActionPreference = 'Stop'
+    Remove-TypeData -TypeName System.Security.AccessControl.ObjectSecurity
     Import-Module Microsoft.PowerShell.Security
     Write-Output "Microsoft.PowerShell.Security module imported successfully."
   displayName: 'Check and Import PowerShell Security Module'
+  pwsh: false # Ensure this runs in Windows PowerShell
 
 - script: 'npx node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
-
-- task: gulp@1
-  displayName: 'Run gulp tasks'
 
 - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
   displayName: 'Write build info'
@@ -43,3 +39,6 @@ steps:
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
+
+- task: gulp@1
+  displayName: 'Run gulp tasks'
