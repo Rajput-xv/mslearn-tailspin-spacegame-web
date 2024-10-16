@@ -20,8 +20,10 @@ steps:
     verbose: false
 
 - powershell: |
-    Import-Module Microsoft.PowerShell.Security
-  displayName: 'Import PowerShell Security Module'
+    $PSVersionTable
+    Install-Module -Name Microsoft.PowerShell.Security -Force -Verbose
+    Import-Module Microsoft.PowerShell.Security -Verbose
+  displayName: 'Check PowerShell Version and Import Security Module'
 
 - script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
