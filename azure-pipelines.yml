@@ -19,6 +19,10 @@ steps:
   inputs:
     verbose: false
 
+- powershell: |
+    Import-Module Microsoft.PowerShell.Security
+  displayName: 'Import PowerShell Security Module'
+
 - script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
 
@@ -41,47 +45,3 @@ steps:
     command: 'build'
     arguments: '--no-restore --configuration Release'
     projects: '**/*.csproj'
-# trigger:
-# - '*'
-
-# pool: 
-#   name: 'Default'
-
-# variables:
-#   buildConfiguration: 'Release'
-
-# steps:
-# - script: echo %PATH%
-#   displayName: 'Print PATH'
-
-# - script: |
-#     if exist "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" (
-#         echo "PowerShell found"
-#         set PATH=C:\Windows\System32\WindowsPowerShell\v1.0;%PATH%
-#     ) else (
-#         echo "PowerShell not found"
-#         exit /b 1
-#     )
-#     echo "Updated PATH with PowerShell: %PATH%"
-#   displayName: 'Ensure PowerShell is available'
-
-# - task: UseDotNet@2
-#   displayName: 'Use .NET SDK 6.x'
-#   inputs:
-#     packageType: sdk
-#     version: '6.x'
-#     installationPath: $(Agent.ToolsDirectory)/dotnet
-
-# - task: DotNetCoreCLI@2
-#   displayName: 'Restore project dependencies'
-#   inputs:
-#     command: 'restore'
-#     projects: '**/*.csproj'
-
-# - task: DotNetCoreCLI@2
-#   displayName: 'Build the project - Release'
-#   inputs:
-#     command: 'build'
-#     arguments: '--no-restore --configuration Release'
-#     projects: '**/*.csproj' 
- 
