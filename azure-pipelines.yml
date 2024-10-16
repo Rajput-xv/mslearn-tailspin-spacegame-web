@@ -19,13 +19,7 @@ steps:
   inputs:
     verbose: false
 
-- powershell: |
-    $PSVersionTable
-    Install-Module -Name Microsoft.PowerShell.Security -Force -Verbose
-    Import-Module Microsoft.PowerShell.Security -Verbose
-  displayName: 'Check PowerShell Version and Import Security Module'
-
-- script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
+- script: 'npx node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
 
 - task: gulp@1
@@ -39,11 +33,4 @@ steps:
   displayName: 'Restore project dependencies'
   inputs:
     command: 'restore'
-    projects: '**/*.csproj'
-
-- task: DotNetCoreCLI@2
-  displayName: 'Build the project - Release'
-  inputs:
-    command: 'build'
-    arguments: '--no-restore --configuration Release'
     projects: '**/*.csproj'
