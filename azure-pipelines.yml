@@ -25,7 +25,6 @@ steps:
     Import-Module Microsoft.PowerShell.Security
     Write-Output "Microsoft.PowerShell.Security module imported successfully."
   displayName: 'Check and Import PowerShell Security Module'
-  pwsh: false # Ensure this runs in Windows PowerShell
 
 - script: 'npx node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
