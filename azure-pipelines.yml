@@ -19,6 +19,15 @@ steps:
   inputs:
     verbose: false
 
+- powershell: |
+    if (-not (Get-Module -ListAvailable -Name Microsoft.PowerShell.Security)) {
+        Write-Error "Microsoft.PowerShell.Security module is not available."
+        exit 1
+    }
+    Import-Module Microsoft.PowerShell.Security
+    Write-Output "Microsoft.PowerShell.Security module imported successfully."
+  displayName: 'Check and Import PowerShell Security Module'
+
 - script: 'npx node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
 
